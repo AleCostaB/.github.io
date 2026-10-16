@@ -3,122 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il mio Spazio - Architettura e Idee</title>
+    <title>Nome Cognome — Architetto</title>
     <style>
         :root {
-            --bg-color: #f9f9f9;
-            --text-color: #222;
-            --accent-color: #333;
-            --card-bg: #fff;
-            --border-color: #e2e2e2;
+            --bg: #ffffff;
+            --text: #111111;
+            --gray: #777777;
+            --light-gray: #f4f4f4;
+            --border: #e0e0e0;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+        }
+
+        /* Navigazione fissa minimale in alto */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 50px;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-weight: 600; font-size: 1.1rem; text-decoration: none; color: var(--text); }
+        
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
+
+        /* Contenitore principale */
+        main { max-width: 1400px; margin: 0 auto; padding: 140px 50px 80px 50px; }
+
+        /* Sezione Intro / Etica */
+        .intro {
+            max-width: 800px;
+            margin-bottom: 100px;
+        }
+        .intro h1 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+        .intro p {
+            font-size: 1.2rem;
+            color: var(--gray);
             line-height: 1.6;
         }
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 40px;
+
+        /* Sezioni generali */
+        section { margin-bottom: 120px; }
+        h2 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray);
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
         }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; letter-spacing: -1px; }
-        header p { color: #666; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-        
-        section { margin-bottom: 50px; }
-        h2 { font-size: 1.5rem; margin-bottom: 20px; border-left: 4px solid var(--accent-color); padding-left: 12px; }
-        
-        /* Griglia Progetti Architettonici */
+
+        /* Griglia Progetti (Stile Portfolio Architettonico) */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
         }
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        .project-item { cursor: pointer; }
+        .project-img-placeholder {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background-color: var(--light-gray);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
         }
-        .project-card h3 { margin-top: 0; font-size: 1.2rem; }
+        .project-title { font-size: 1.1rem; font-weight: 500; }
+        .project-desc { font-size: 0.9rem; color: var(--gray); }
+
+        /* Bacheca Notizie e Libri (Layout a due colonne di Contenuti) */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+        }
         
-        /* Liste (Libri e Notizie) */
-        ul { list-style: none; padding: 0; }
-        li { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border-color); 
-            padding: 15px; 
-            margin-bottom: 10px; 
-            border-radius: 6px; 
+        .list-card {
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: 4px;
         }
-        
+        .list-card h3 { font-size: 1.2rem; margin-bottom: 20px; font-weight: 500; }
+        .list-card ul { list-style: none; }
+        .list-card li { margin-bottom: 15px; font-size: 0.95rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .list-card li:last-child { border: none; margin: 0; padding: 0; }
+
+        /* Footer */
         footer {
-            text-align: center;
-            margin-top: 80px;
-            font-size: 0.9rem;
-            color: #888;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive per smartphone */
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .nav-links { display: none; } /* Semplificato per mobile */
+            main { padding: 100px 20px 40px 20px; }
+            .projects-grid, .content-grid { grid-template-columns: 1.fr; gap: 30px; }
+            .intro h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Il mio Spazio Personale</h1>
-        <p>Architettura, principi etici, letture e riflessioni sul futuro del design.</p>
-    </header>
-
-    <section>
-        <h2>📐 Progetti Architettonici</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>Nome Progetto 1</h3>
-                <p>Breve descrizione del concept, dei materiali e della realizzazione.</p>
-            </div>
-            <div class="project-card">
-                <h3>Nome Progetto 2</h3>
-                <p>Breve descrizione del concept, dei materiali e della realizzazione.</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>📰 Bacheca Notizie</h2>
-        <ul>
-            <li><strong>Titolo Articolo Interessante</strong> - Un piccolo commento personale sul perché questa notizia mi ha colpito.</li>
-            <li><strong>Altro spunto dal web</strong> - Riflessione o citazione estratta da un articolo di design.</li>
+    <!-- Navigazione -->
+    <nav>
+        <a href="#" class="logo">NOME COGNOME</a>
+        <ul class="nav-links">
+            <li><a href="#progetti">Progetti</a></li>
+            <li><a href="#bacheca">Bacheca</a></li>
+            <li><a href="#libreria">Libreria</a></li>
+            <li><a href="#etica">Etica & Visione</a></li>
         </ul>
-    </section>
+    </nav>
 
-    <section>
-        <h2>📚 Libreria</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>Letti di recente</h3>
-                <p>• Titolo Libro 1 - Autore<br>• Titolo Libro 2 - Autore</p>
-            </div>
-            <div class="project-card">
-                <h3>Da leggere (Wishlist)</h3>
-                <p>• Titolo Libro 3 - Autore<br>• Titolo Libro 4 - Autore</p>
-            </div>
+    <!-- Contenuto Principale -->
+    <main>
+
+        <!-- Sezione Etica / Visione iniziale (stile Studio Manifesto) -->
+        <div class="intro" id="etica">
+            <h1>Architettura come risposta logica al contesto, fondata su rigore, etica e ricerca spaziale.</h1>
+            <p>Questo spazio raccoglie la mia visione progettuale, i lavori realizzati, una selezione critica di notizie dal mondo del design e i testi che alimentano il mio percorso di crescita professionale e personale.</p>
         </div>
-    </section>
 
-    <section>
-        <h2>💡 Etica e Visione</h2>
-        <p><em>"Ciò che voglio diventare e i principi che guidano la mia progettazione..."</em> (Spazio per scrivere la tua visione personale e professionale).</p>
-    </section>
+        <!-- Sezione Progetti Architettonici -->
+        <section id="progetti">
+            <h2>Progetti Realizzati</h2>
+            <div class="projects-grid">
+                <div class="project-item">
+                    <div class="project-img-placeholder">[ Inserire Immagine Progetto 1 ]</div>
+                    <div class="project-title">Residenza V. — 2025</div>
+                    <div class="project-desc">Studio volumetrico e integrazione materica nel paesaggio.</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-img-placeholder">[ Inserire Immagine Progetto 2 ]</div>
+                    <div class="project-title">Padiglione Urbano — 2024</div>
+                    <div class="project-desc">Riqualificazione dello spazio pubblico e flessibilità d'uso.</div>
+                </div>
+            </div>
+        </section>
 
-    <footer>
-        <p>© 2026 - Creato con GitHub Pages</p>
-    </footer>
+        <!-- Sezione Bacheca & Libreria (Accostate con eleganza) -->
+        <div class="content-grid">
+            <section id="bacheca" style="margin-bottom:0;">
+                <h2>Bacheca & Segnalazioni</h2>
+                <div class="list-card">
+                    <h3>Rassegna di Pensiero</h3>
+                    <ul>
+                        <li><strong>Articolo / Rivista:</strong> Riflessioni sull'uso del cemento a crudo nel contesto contemporaneo. <br><span style="color:var(--gray); font-size:0.85rem;">— Commento personale breve.</span></li>
+                        <li><strong>Spunto Web:</strong> La sostenibilità non come etichetta, ma come struttura logica dell'edificio.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="libreria" style="margin-bottom:0;">
+                <h2>Libreria</h2>
+                <div class="list-card">
+                    <h3>Letture & Wishlist</h3>
+                    <ul>
+                        <li><strong>Letti:</strong> Pallasmaa, *Gli occhi della pelle* (Fondamentale per la percezione sensoriale).</li>
+                        <li><strong>In wishlist:</strong> Zumthor, *Atmosfere*.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <main style="padding-top: 0; padding-bottom: 60px;">
+        <footer>
+            <div>© 2026 Nome Cognome. Tutti i diritti riservati.</div>
+            <div>Contatto: tuamail@domain.com</div>
+        </footer>
+    </main>
 
 </body>
 </html>
